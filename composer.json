@@ -1,0 +1,25 @@
+{
+  "name": "gulaandrij/telegram-monolog",
+  "license": "MIT",
+  "description": "",
+  "autoload": {
+    "psr-4": {
+      "TelegramMonolog\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.2",
+    "guzzlehttp/guzzle": "^6.3",
+    "symfony/framework-bundle": "^4.1",
+    "monolog/monolog": "^1.9"
+  },
+  "require-dev": {
+    "gulaandrij/coding-standard": "^1.0.0",
+    "symfony/var-dumper": "^4.1"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@php -r \"file_exists('phpcs.xml') || copy('phpcs.xml.dist', 'phpcs.xml');\""
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+services:
+  telegram_monolog.handler:
+    class: TelegramMonolog\Service\TelegramHandler
+    arguments:
+      - "%monolog_telegram.token%"
+      - "%monolog_telegram.chat_id%"
+#      -
+#      -
