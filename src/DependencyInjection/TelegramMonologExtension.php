@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramMonologBundle\DependencyInjection;
+namespace TelegramMonolog\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,6 +18,8 @@ class TelegramMonologExtension extends Extension
     /**
      * @param array $configs
      * @param ContainerBuilder $container
+     *
+     * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container)
     {

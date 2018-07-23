@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramMonologBundle;
+namespace TelegramMonolog;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -11,5 +11,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class TelegramMonologBundle extends Bundle
 {
-
+    public function getParent(): ?string
+    {
+        return null;
+    }
 }
