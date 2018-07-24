@@ -2,6 +2,7 @@
   "name": "gulaandrij/telegram-monolog",
   "license": "MIT",
   "description": "",
+  "type": "symfony-bundle",
   "autoload": {
     "psr-4": {
       "TelegramMonologBundle\\": "src/"
