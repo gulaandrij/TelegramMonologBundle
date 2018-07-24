@@ -1,6 +1,6 @@
 <?php
 
-namespace App\TelegramMonolog\Services;
+namespace TelegramMonologBundle\Services;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;

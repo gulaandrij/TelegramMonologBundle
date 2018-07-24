@@ -1,6 +1,6 @@
 <?php
 
-namespace App\TelegramMonolog\DependencyInjection;
+namespace TelegramMonologBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
