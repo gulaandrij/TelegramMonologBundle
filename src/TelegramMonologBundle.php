@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramMonologBundle;
+namespace TelegramMonolog\Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
