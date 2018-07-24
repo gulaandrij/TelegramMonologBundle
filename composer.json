@@ -4,7 +4,7 @@
   "description": "",
   "autoload": {
     "psr-4": {
-      "TelegramMonolog\\": "src/"
+      "App\\TelegramMonolog": "src/"
     }
   },
   "require": {

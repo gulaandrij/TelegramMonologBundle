@@ -1,6 +1,6 @@
 services:
   telegram_monolog:
-    class: TelegramMonolog\Services\TelegramHandler
+    class: App\TelegramMonolog\Services\TelegramHandler
     arguments:
       - "%monolog_telegram.token%"
       - "%monolog_telegram.chat_id%"
