@@ -10,9 +10,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class TelegramMonologExtension
- *
- * @package TelegramMonolog\Bundle\DependencyInjection
+ * Class TelegramMonologExtension.
  */
 class TelegramMonologExtension extends Extension
 {
@@ -24,7 +22,7 @@ class TelegramMonologExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
 
         $container->setParameter('monolog_telegram.token', $config['token']);

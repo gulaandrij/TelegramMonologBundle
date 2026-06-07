@@ -10,18 +10,16 @@
   },
   "require": {
     "php": "^8.4",
-    "ext-curl": "*",
-    "ext-json": "*",
     "symfony/framework-bundle": "^7.0 || ^8.0",
+    "symfony/http-client": "^7.0 || ^8.0",
     "monolog/monolog": "^3.0"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.10",
+    "friendsofphp/php-cs-fixer": "^3.50",
     "symfony/var-dumper": "^7.0 || ^8.0"
   },
   "scripts": {
-    "post-install-cmd": [
-      "@php -r \"file_exists('phpcs.xml') || copy('phpcs.xml.dist', 'phpcs.xml');\""
-    ]
+    "cs-check": "php-cs-fixer fix --dry-run --diff",
+    "cs-fix": "php-cs-fixer fix"
   }
 }

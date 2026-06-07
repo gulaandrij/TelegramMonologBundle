@@ -5,41 +5,33 @@ declare(strict_types=1);
 namespace TelegramMonolog\Bundle\Services;
 
 use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Handler\Curl;
 use Monolog\Level;
 use Monolog\LogRecord;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class TelegramHandler extends AbstractProcessingHandler
 {
+    private readonly HttpClientInterface $httpClient;
+
     public function __construct(
         private readonly string $token,
         private readonly string|int $chatId,
+        ?HttpClientInterface $httpClient = null,
     ) {
         parent::__construct(Level::Debug, true);
+        $this->httpClient = $httpClient ?? HttpClient::create();
     }
 
     /**
-     * Builds the header of the API Call.
+     * Builds the body of the API call.
      */
-    protected function buildHeader(string $content): array
+    protected function buildContent(LogRecord $record): array
     {
         return [
-            'Content-Type: application/json',
-            'Content-Length: ' . \strlen($content),
-        ];
-    }
-
-    /**
-     * Builds the body of API call.
-     */
-    protected function buildContent(LogRecord $record): string
-    {
-        $content = [
             'chat_id' => $this->chatId,
             'text' => $record->formatted,
         ];
-
-        return \json_encode($content);
     }
 
     /**
@@ -47,13 +39,10 @@ class TelegramHandler extends AbstractProcessingHandler
      */
     protected function write(LogRecord $record): void
     {
-        $content = $this->buildContent($record);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->buildHeader($content));
-        curl_setopt($ch, CURLOPT_URL, sprintf('https://api.telegram.org/bot%s/sendMessage', $this->token));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
-        Curl\Util::execute($ch);
+        $this->httpClient->request(
+            'POST',
+            sprintf('https://api.telegram.org/bot%s/sendMessage', $this->token),
+            ['json' => $this->buildContent($record)],
+        );
     }
 }
