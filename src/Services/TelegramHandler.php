@@ -25,6 +25,8 @@ class TelegramHandler extends AbstractProcessingHandler
 
     /**
      * Builds the body of the API call.
+     *
+     * @return array<string, mixed>
      */
     protected function buildContent(LogRecord $record): array
     {

@@ -16,10 +16,12 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.50",
+    "phpstan/phpstan": "^2.0",
     "symfony/var-dumper": "^7.0 || ^8.0"
   },
   "scripts": {
     "cs-check": "php-cs-fixer fix --dry-run --diff",
-    "cs-fix": "php-cs-fixer fix"
+    "cs-fix": "php-cs-fixer fix",
+    "phpstan": "phpstan analyse"
   }
 }
