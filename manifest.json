@@ -1,5 +1,5 @@
 {
     "bundles": {
-        "App\\TelegramMonolog\\TelegramMonologBundle": ["all"]
+        "TelegramMonolog\\Bundle\\TelegramMonologBundle": ["all"]
     }
 }

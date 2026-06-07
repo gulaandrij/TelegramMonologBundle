@@ -25,6 +25,6 @@
     <arg name="parallel" value="30"/>
     <arg name="report" value="code"/>
 
-    <rule ref="SelectoCodingStandard"/>
+    <rule ref="PSR12"/>
 
 </ruleset>

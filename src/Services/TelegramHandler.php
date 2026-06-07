@@ -1,73 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TelegramMonolog\Bundle\Services;
 
 use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Logger;
+use Monolog\Handler\Curl;
+use Monolog\Level;
+use Monolog\LogRecord;
 
 class TelegramHandler extends AbstractProcessingHandler
 {
-
-    private $token;
-
-    private $chatId;
-
-    /**
-     * TelegramHandler constructor.
-     *
-     * @param string $token
-     * @param $chatId
-     */
     public function __construct(
-        string $token,
-        $chatId
-//,
-//        int $level = Logger::DEBUG,
-//        bool $bubble = true
+        private readonly string $token,
+        private readonly string|int $chatId,
     ) {
-        parent::__construct(Logger::DEBUG, true);
-        $this->token = $token;
-        $this->chatId = $chatId;
+        parent::__construct(Level::Debug, true);
     }
+
     /**
      * Builds the header of the API Call.
-     *
-     * @param string $content
-     *
-     * @return array
      */
-    protected function buildHeader($content)
+    protected function buildHeader(string $content): array
     {
         return [
             'Content-Type: application/json',
-            'Content-Length: '. \strlen($content),
+            'Content-Length: ' . \strlen($content),
         ];
     }
+
     /**
      * Builds the body of API call.
-     *
-     * @param array $record
-     *
-     * @return string
      */
-    protected function buildContent(array $record)
+    protected function buildContent(LogRecord $record): string
     {
         $content = [
             'chat_id' => $this->chatId,
-            'text' => $record['formatted'],
+            'text' => $record->formatted,
         ];
-//        if ($this->formatter instanceof HtmlFormatter) {
-//            $content['parse_mode'] = 'HTML';
-//        }
+
         return \json_encode($content);
     }
+
     /**
-     * Writes the record down to the log of the implementing handler
-     *
-     * @param  array $record
-     * @return void
+     * Writes the record down to the log of the implementing handler.
      */
-    protected function write(array $record)
+    protected function write(LogRecord $record): void
     {
         $content = $this->buildContent($record);
         $ch = curl_init();
